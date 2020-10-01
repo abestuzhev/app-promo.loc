@@ -1,6 +1,53 @@
 import {Page} from "../router/Page";
-
+const actionDataArr = [
+    {
+        text: 'text 1'
+    },
+    {
+        text: 'text 2'
+    },
+    {
+        text: 'text 3'
+    },
+    {
+        text: 'text 4'
+    },
+    {
+        text: 'text 5'
+    },
+    {
+        text: 'text 6'
+    },
+    {
+        text: 'text 7'
+    }
+];
 export class Dashboard extends Page{
+    
+    //получение данных с сервера
+    
+    //
+
+    createCell(actionDataArr){
+
+        //получаем массив акций
+        let actionParam = [];
+        actionDataArr.map( action => {
+            actionParam.push(
+                `
+            <div class="cell">
+                ${action.text}
+            </div>
+            `
+            )
+        });
+
+        return actionParam.join('');
+    }
+
+    createRow(){
+
+    }
 
     getRoot(){
         const elem = super.getRoot('dashboard');
@@ -91,27 +138,8 @@ export class Dashboard extends Page{
                     </div>
 
                     <div class="row">
-                        <div class="cell" data-title="Full Name">
-                            Vincent Williamson
-                        </div>
-                        <div class="cell" data-title="Age">
-                            31
-                        </div>
-                        <div class="cell" data-title="Job Title">
-                            iOS Developer
-                        </div>
-                        <div class="cell" data-title="Job Title">
-                            iOS Developer
-                        </div>
-                        <div class="cell" data-title="Location">
-                            Washington
-                        </div>
-                        <div class="cell" data-title="Location">
-                            Washington
-                        </div>
-                        <div class="cell" data-title="Location">
-                            Washington
-                        </div>
+                        ${this.createCell(actionDataArr)}
+                        
                     </div>
 
 
