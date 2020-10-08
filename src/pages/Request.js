@@ -3,21 +3,13 @@ import {createAction} from "../core/utils";
 
 
 export class Request{
-    getActions(){
+    async getActions(){
 
-        let arr = [];
+        return await request('http://api.app-promo.loc/actions');
 
-        const responceActions = request('http://api.app-promo.loc/actions');
-        responceActions.then( action => {
-            // createAction(actions);
-            
-            action.forEach( a => {
-                arr.push(a);
-            })
-            console.log('responceActions', action);
-            // arr.push(action);
-        });
 
-        return arr;
+
+
+        // console.log('data', data);
     };
 }

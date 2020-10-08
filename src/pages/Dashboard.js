@@ -7,49 +7,47 @@ export class Dashboard extends Page{
     constructor(){
         super();
         this.request = new Request();
+        this.createTable();
     }
     
     //получение данных с сервера
     
 
-    createCell(actionDataArr){
-        const request = this.request.getActions();
-        // console.log('request', request);
-        //получаем массив акций
+    async createTable(){
+        const actions = await this.request.getActions();
+
+        let rows = [];
+        console.log('actions', actions);
 
 
-        // const request = [
-        //     {
-        //         productText: 'sdfkghsdfkgh dfgdfgd'
-        //     },
-        //     {
-        //         productText: '7987987987123123 dfgdfgd'
-        //     }
-
-        // ]
-        console.log('requestsdf', request);
-        let actionParam = [];
-        request.forEach( action => {
-            // console.log('action', action);
-            actionParam.push(
-                `
-            <div class="cell">
-                ${action.productText}
-            </div>
-            `
-            )
+        actions.forEach( action => {
+            rows.push(this.createRow(this.createCell(action)));
         });
-        console.log('actionParam', actionParam);
-        return actionParam.join('');
-        
 
 
 
-
+        const $el = document.querySelector("[data-type='actions']");
+        $el.innerHTML = rows.join('');
     }
 
-    createRow(){
-        return `<div class="row"></div>`
+    createRow(content){
+        return `<div class="row">${content}</div>`
+    }
+
+
+    createCell(action){
+        let actionParam = [];
+
+        for(let key in action){
+            // console.log(key + ': ' + action[key]);
+            actionParam.push(`
+            <div class="cell">
+               ${action[key]}
+            </div>
+            `)
+        }
+
+        return actionParam.join('');
     }
 
     getRoot(){
@@ -139,10 +137,10 @@ export class Dashboard extends Page{
                             ред
                         </div>
                     </div>
+                    
 
-                    <div class="row">
-                        ${this.createCell()}
-                        
+                    <div class="" data-type="actions">
+                                                
                     </div>
 
 
