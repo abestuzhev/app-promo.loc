@@ -1,52 +1,55 @@
 import {Page} from "../router/Page";
-const actionDataArr = [
-    {
-        text: 'text 1'
-    },
-    {
-        text: 'text 2'
-    },
-    {
-        text: 'text 3'
-    },
-    {
-        text: 'text 4'
-    },
-    {
-        text: 'text 5'
-    },
-    {
-        text: 'text 6'
-    },
-    {
-        text: 'text 7'
-    }
-];
+import {Request} from "./Request";
+
+
 export class Dashboard extends Page{
+
+    constructor(){
+        super();
+        this.request = new Request();
+    }
     
     //получение данных с сервера
     
-    //
 
     createCell(actionDataArr){
-
+        const request = this.request.getActions();
+        // console.log('request', request);
         //получаем массив акций
+
+
+        // const request = [
+        //     {
+        //         productText: 'sdfkghsdfkgh dfgdfgd'
+        //     },
+        //     {
+        //         productText: '7987987987123123 dfgdfgd'
+        //     }
+
+        // ]
+        console.log('requestsdf', request);
         let actionParam = [];
-        actionDataArr.map( action => {
+        request.forEach( action => {
+            // console.log('action', action);
             actionParam.push(
                 `
             <div class="cell">
-                ${action.text}
+                ${action.productText}
             </div>
             `
             )
         });
-
+        console.log('actionParam', actionParam);
         return actionParam.join('');
+        
+
+
+
+
     }
 
     createRow(){
-
+        return `<div class="row"></div>`
     }
 
     getRoot(){
@@ -138,7 +141,7 @@ export class Dashboard extends Page{
                     </div>
 
                     <div class="row">
-                        ${this.createCell(actionDataArr)}
+                        ${this.createCell()}
                         
                     </div>
 

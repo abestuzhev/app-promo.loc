@@ -8,7 +8,7 @@ const router = new Router('#root', {
    action: Action,
    admin: Dashboard
 });
-console.log('router', router);
+// console.log('router', router);
 
 
 
